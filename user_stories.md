@@ -14,4 +14,12 @@ I want to add money to my card
 
 | Object | Message |
 | :----: | :----: |
-| oystercard | top_up|
+| oystercard | top_up |
+
+>In order to pay for my journey
+As a customer
+I need my fare deducted from my card
+
+| Object | Message |
+| :----: | :----: |
+| oystercard | deduct_balance |

@@ -8,9 +8,13 @@ MAX_BALANCE = 90
     @balance
   end
 
-  def top_up(money)
-    fail "Reached maximum balance £#{MAX_BALANCE}!" if @balance + money > MAX_BALANCE
-    @balance += money
+  def top_up(amount)
+    fail "Reached maximum balance £#{MAX_BALANCE}!" if @balance + amount > MAX_BALANCE # >= MAX_BALANCE
+    @balance += amount
+  end
+
+  def deduct(amount)
+    @balance -= amount
   end
 
 end
