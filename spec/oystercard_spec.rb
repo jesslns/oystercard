@@ -1,5 +1,5 @@
-require 'oyster'
+require 'oystercard'
 
-describe Oyster do
-  
+describe Oystercard do
+
 end
