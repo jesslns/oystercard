@@ -7,7 +7,12 @@ attr_reader :balance
   end
 
   def top_up(money)
+    fail "Reach maximum balance!" if reach_maximum?
     @balance += money
+  end
+
+  def reach_maximum?
+    @balance >= 90
   end
 
 end
