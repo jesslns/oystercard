@@ -9,7 +9,6 @@ describe Oystercard do
     end
   end
 
-
   describe '#top_up' do
     it { is_expected.to respond_to(:top_up).with(1).argument }
 
@@ -35,6 +34,11 @@ describe Oystercard do
       subject.top_up(10)
       amount = 2
       expect{ subject.deduct amount }.to change{ subject.balance }.by -amount
+    end
+    it "deducts money on touch out" do
+      subject.top_up(5)
+      subject.touch_in
+      expect{ subject.touch_out }.to change{ subject.balance }.by -subject.fare
     end
   end
 
