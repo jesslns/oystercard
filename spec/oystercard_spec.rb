@@ -27,20 +27,11 @@ describe Oystercard do
     end
   end
 
-  describe '#deduct' do
-    it { is_expected.to respond_to(:deduct).with(1).argument }
-
-    it "deducts money from oystercard" do
-      subject.top_up(10)
-      amount = 2
-      expect{ subject.deduct amount }.to change{ subject.balance }.by -amount
-    end
     it "deducts money on touch out" do
       subject.top_up(5)
       subject.touch_in
-      expect{ subject.touch_out }.to change{ subject.balance }.by -subject.fare
+      expect{ subject.touch_out }.to change{ subject.balance}.by -(Oystercard::MIN_CHARGE)
     end
-  end
 
   describe '#in_journey?' do
     it 'initially not in journey' do
