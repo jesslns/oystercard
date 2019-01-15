@@ -23,3 +23,11 @@ I need my fare deducted from my card
 | Object | Message |
 | :----: | :----: |
 | oystercard | deduct_balance |
+
+>In order to get through the barriers.
+As a customer
+I need to touch in and out.
+
+| Object | Message |
+| :----: | :----: |
+| oystercard | touch_in, touch_out |
