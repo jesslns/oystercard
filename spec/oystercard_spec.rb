@@ -22,6 +22,10 @@ describe Oystercard do
       subject.top_up(Oystercard::MAX_BALANCE)
       expect{ subject.top_up(5)}.to raise_error "Reached maximum balance £#{Oystercard::MAX_BALANCE}!"
     end
+
+    it "needs minimum balance" do
+      expect{ subject.touch_in }.to raise_error "Need a minimum of £#{Oystercard::MIN_BALANCE}!"
+    end
   end
 
   describe '#deduct' do
@@ -37,15 +41,17 @@ describe Oystercard do
   describe '#in_journey?' do
     it 'initially not in journey' do
       #expect(subject.in_journey?).to eq false
-      expect(subject).not_to be_in_journey  
+      expect(subject).not_to be_in_journey
     end
   end
 
     it 'can touch in' do
+      subject.top_up(5)
       subject.touch_in
       expect(subject).to be_in_journey
     end
     it 'can touch out' do
+      subject.top_up(5)
       subject.touch_in
       subject.touch_out
       expect(subject).not_to be_in_journey
