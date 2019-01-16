@@ -21,7 +21,7 @@ describe Oystercard do
   it "deducts money on touch out" do
     subject.top_up(5)
     subject.touch_in(entry_station)
-    expect{ subject.touch_out(exit_station) }.to change{ subject.balance }.by (-Oystercard::MIN_CHARGE)
+    expect{ subject.touch_out(exit_station) }.to change{ subject.balance }.by(-Oystercard::MIN_CHARGE)
   end
 
   describe '#in_journey?' do
