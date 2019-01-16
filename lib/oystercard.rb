@@ -31,13 +31,13 @@ MIN_CHARGE = 2
     @journey[-1][:out] = exit_station
   end
 
-def make_hash
-  {in: nil, out: nil}
-end
-
   private
   def deduct(amount)
     @balance -= amount
+  end
+
+  def make_hash
+    {in: nil, out: nil}
   end
 
 end
