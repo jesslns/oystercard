@@ -3,4 +3,5 @@
 Resource at [here](https://github.com/jesslns/course/tree/master/oystercard).
 
 Collaborate with:
-- Dan
+- Dan Groze
+- Ibrahim Butt

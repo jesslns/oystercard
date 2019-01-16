@@ -20,7 +20,7 @@ describe Oystercard do
     it "deducts money on touch out" do
       subject.top_up(5)
       subject.touch_in(entry_station)
-      expect{ subject.touch_out(exit_station) }.to change{ subject.balance}.by -(Oystercard::MIN_CHARGE)
+      expect{ subject.touch_out(exit_station) }.to change{ subject.balance }.by -(Oystercard::MIN_CHARGE)
     end
 
   describe "#entry_station" do
@@ -49,6 +49,18 @@ describe Oystercard do
     it 'initially has empty journey history ' do
       history = subject.journey
       expect(history.empty?).to eq true
+    end
+
+    it "saves journey history" do
+      entry_station2 = double (:station)
+      exit_station2 = double (:station)
+      subject.top_up(5)
+      subject.touch_in(entry_station)
+      subject.touch_out(exit_station)
+      subject.touch_in(entry_station2)
+      subject.touch_out(exit_station2)
+      result = [{in: entry_station, out: exit_station}, {in: entry_station2, out: exit_station2}]
+      expect(subject.journey).to eq result
     end
 
     it "save exit station" do

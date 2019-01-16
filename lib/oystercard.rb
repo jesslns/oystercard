@@ -7,7 +7,7 @@ MIN_CHARGE = 2
   def initialize
     @balance = 0
     @entry_station = nil
-    @journey = Hash.new
+    @journey = []
   end
 
   def top_up(amount)
@@ -22,18 +22,21 @@ MIN_CHARGE = 2
   def touch_in (entry_station)
     fail "Need a minimum of £#{MIN_BALANCE}!" if @balance < MIN_BALANCE
     @entry_station = entry_station
+    hash = make_hash
+    hash[:in] = entry_station
+    @journey << hash
   end
 
   def touch_out(exit_station)
     deduct(MIN_CHARGE)
     @entry_station = nil
     @exit_station = exit_station
-    save_journey
+    @journey[-1][:out] = exit_station
   end
 
-  def save_journey
-    @journey[@entry_station] = @exit_station
-  end
+def make_hash
+  {in: nil, out: nil}
+end
 
   private
   def deduct(amount)
