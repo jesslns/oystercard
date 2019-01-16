@@ -23,24 +23,8 @@ describe Oystercard do
       expect{ subject.touch_out(exit_station) }.to change{ subject.balance }.by -(Oystercard::MIN_CHARGE)
     end
 
-  describe "#entry_station" do
-    it "saves entry station" do
-      subject.top_up(5)
-      subject.touch_in(entry_station)
-      expect(subject.entry_station).to eq entry_station
-    end
-
-    it "forgets entry station when touch out" do
-      subject.top_up(5)
-      subject.touch_in(entry_station)
-      subject.touch_out(exit_station)
-      expect(subject.entry_station).to eq nil
-    end
-  end
-
   describe '#in_journey?' do
     it 'initially not in journey' do
-      #expect(subject.in_journey?).to eq false
       expect(subject).not_to be_in_journey
     end
   end
@@ -63,12 +47,6 @@ describe Oystercard do
       expect(subject.journey).to eq result
     end
 
-    it "save exit station" do
-      subject.top_up(5)
-      subject.touch_in(entry_station)
-      subject.touch_out(exit_station)
-      expect(subject.exit_station).to eq exit_station
-    end
   end
 
 end
