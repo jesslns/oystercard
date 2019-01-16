@@ -31,7 +31,7 @@ describe Oystercard do
 
   describe "#journey" do
     it 'initially has empty journey history ' do
-      history = subject.journey
+      history = subject.journey_list
       expect(history.empty?).to eq true
     end
 
@@ -44,9 +44,14 @@ describe Oystercard do
       subject.touch_in(entry_station2)
       subject.touch_out(exit_station2)
       result = [{in: entry_station, out: exit_station}, {in: entry_station2, out: exit_station2}]
-      expect(subject.journey).to eq result
+      expect(subject.journey_list).to eq result
     end
 
+    it "stores entry station in Journey object" do
+      subject.top_up(5)
+      subject.touch_in("Paddington")
+      expect(subject.journey_list[-1].entry_station).to eq "Paddington"
+    end
   end
 
 end

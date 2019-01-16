@@ -1,12 +1,14 @@
+require_relative 'journey'
+
 class Oystercard
 
-attr_reader :balance, :max_balance, :journey
+attr_reader :balance, :max_balance, :journey_list
 MAX_BALANCE = 90
 MIN_BALANCE = 1
 MIN_CHARGE = 2
   def initialize
     @balance = 0
-    @journey = []
+    @journey_list = []
   end
 
   def top_up(amount)
@@ -15,29 +17,25 @@ MIN_CHARGE = 2
   end
 
   def in_journey?
-    return false if @journey.empty?
-    @journey[-1][:out].nil?
+    return false if @journey_list.empty?
+    @journey_list[-1][:out].nil?
   end
 
   def touch_in (entry_station)
     fail "Need a minimum of £#{MIN_BALANCE}!" if @balance < MIN_BALANCE
-    hash = make_hash
+    hash = {}
     hash[:in] = entry_station
-    @journey << hash
+    @journey_list << Journey.new(hash)
   end
 
   def touch_out(exit_station)
     deduct(MIN_CHARGE)
-    @journey[-1][:out] = exit_station
+    @journey_list[-1][:out] = exit_station
   end
 
   private
   def deduct(amount)
     @balance -= amount
-  end
-
-  def make_hash
-    {in: nil, out: nil}
   end
 
 end
